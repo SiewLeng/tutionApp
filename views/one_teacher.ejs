@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include partials/head %>
+</head>
+<body>
+	<% let url1 = `/teachers/update/${teacher.id}?_method=PUT`; %>
+	<div class="container">
+		<% include partials/menu %>
+		<h3> Update teacher details </h3>
+		</br>
+  	<form action= <%=url1%> method="POST">
+  		<input type="hidden" name="_method" value="PUT">
+  		<div class="form-row">
+    		<div class="form-group col-md-3">
+    			<label> <%="Name: " + teacher.name%> </label>
+      		<input type="text" class="form-control" name="name" placeholder="name">
+    		</div>
+    		<div class="form-group col-md-3">
+    			<label> <%="Age: " + teacher.age%> </label>
+      		<input type="text" class="form-control" name="age" placeholder="age">
+    		</div>
+    		<div class="form-group col-md-3">
+    			<label> <%="Subject: " + teacher.subject%> </label>
+      		<input type="text" class="form-control" name="subject" placeholder="subject">
+    		</div>
+  		</div>
+  		</br>
+  		<button type="submit" class="btn btn-info">Update</button>
+		</form>
+	</div>
+</body>
+<% include partials/script %>
+</html>

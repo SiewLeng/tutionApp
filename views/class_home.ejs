@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include partials/head %>
+</head>
+<body>
+	<div class='container'>
+		<% include partials/menu %>
+		<h3> Class Homepage</h3>
+		<form action='/classes/create' method="POST">
+			<h4> Add A Class: </h4>
+			<input type='text' name='name' placeholder='name of class'>
+			<select class="browser-default custom-select" name='teacherId' style="height: 28px">
+  			<option selected> Select a teacher </option>
+  				<% for (let i = 0; i < listOfTeacher.length; i++) { %>
+  					<% let value = listOfTeacher[i].id; %>
+  					<% let option = `name: ${listOfTeacher[i].name}, subject: ${listOfTeacher[i].subject}`; %>
+  					<option value=<%= value%>> <%= option%> </option>
+  				<% } %>
+			</select>
+			<input type= 'submit' value='submit' class='btn-md btn-info'>
+		</form>
+		</br>
+		<h4> List Of Classes </h4>
+		<table class="table table-striped">
+  		<thead>
+    		<tr>
+      		<th scope="col">#</th>
+      		<th scope="col">Name of Class </th>
+      		<th scope="col"> Name of Tutor </th>
+      		<th scope="col"> Tutor's Subject</th>
+      		<th scope="col"></th>
+      		<th scope="col"></th>
+      		<th scope="col"></th>
+      		<th scope="col"></th>
+    		</tr>
+  		</thead>
+  		<tbody>
+  			<% for(let i = 0; i < listOfClass.length; i++) { %>
+  				<% let url1 = `/classes/find/${listOfClass[i].id}`; %>
+  				<% let url2 = `/classes/delete/${listOfClass[i].id}`; %>
+  				<% let url3 = `/classes/showStudent/${listOfClass[i].id}`; %>
+  				<% let url4 = `/classes/addStudent/${listOfClass[i].id}`; %>
+  				<tr>
+      			<th scope="row"><%=(i+1)%></th>
+      			<td><%=listOfClass[i].name %></td>
+      			<td><%=listOfClass[i].teacher_docs[0].name %></td>
+      			<td><%=listOfClass[i].teacher_docs[0].subject %></td>
+      			<td><a href=<%=url1%> class="btn btn-info" role="button">Edit</a></td>
+      			<td><a href=<%=url2%> class="btn btn-info" role="button">Delete</a></td>
+      			<td><a href=<%=url3%> class="btn btn-info" role="button"> Show List of Student</a></td>
+      			<td><a href=<%=url4%> class="btn btn-info" role="button"> Add Student</a></td>
+    			</tr>
+  			<% } %>
+    	</tbody>
+    </table>
+  </div>
+</body>
+<% include partials/script %>
+</html>

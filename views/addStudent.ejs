@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include partials/head %>
+</head>
+<body>
+	<div class='container'>
+		<% include partials/menu %>
+		<h3> Add student page </h3>
+		<h4> Details Of Class </h4>
+		<table class="table table-striped">
+  		<thead>
+    		<tr>
+      		<th scope="col">Name of Class </th>
+      		<th scope="col"> Name of Tutor </th>
+      		<th scope="col"> Tutor's Subject</th>
+    		</tr>
+  		</thead>
+  		<tbody>
+  				<tr>
+      			<td><%=theClass.name %></td>
+      			<td><%=theClass.teacher_docs[0].name %></td>
+      			<td><%=theClass.teacher_docs[0].subject %></td>
+      		</tr>
+    	</tbody>
+    </table>
+    <h4> Add Student </h4>
+    <% let url = `/classes/addStudent/${theClass.id}?_method=PUT`; %>
+    <form action=<%=url%> method="POST">
+    	<div class="form-row">
+    		<div class="form-group col-md-6">
+      		<label>Name of Student </label>
+    		</div>
+    		<div class="form-group col-md-3">
+      		<label> Age </label>
+    		</div>
+    		<div class="form-group col-md-3">
+      		<label> Select </label>
+    		</div>
+  		</div>
+  		<% for(let i = 0; i < filteredStudentList.length; i++) { %>
+  			<div class="form-row">
+    			<div class="form-group col-md-6">
+      			<%=filteredStudentList[i].name%>
+    			</div>
+    			<div class="form-group col-md-3">
+      			<%=filteredStudentList[i].age%>
+    			</div>
+    			<div class="form-group col-md-3">
+      			<input type="Checkbox" name=<%=i%> value=<%=filteredStudentList[i].id%>>
+    			</div>
+  			</div>
+  		<% } %>
+  		<button type="submit" class="btn btn-info">Add students</button>
+  	</form>
+  </div>
+</body>
+<% include partials/script %>
+</html>
